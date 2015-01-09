@@ -25,6 +25,7 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:title" content="The Periodic Table of WordPress Themes" />
 	<meta property="og:url" content="http://wpthemetable.com" />
+	<meta property="og:image" content="http://wpthemetable.com/img/wpthemetable.png" />
 	<meta property="og:description" content="There are around 3000 themes available in the WordPress.org theme directory. This table showcases the 108 most popular WordPress themes, ranked by the number of downloads." />
 	<link href="https://plus.google.com/103365919153496720927" rel="author" />
 	<link href="https://plus.google.com/+SpinPress" rel="publisher" />
