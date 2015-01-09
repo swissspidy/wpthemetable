@@ -166,7 +166,9 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 		<?php endforeach; ?>
 	</div>
 	<div class="footer">
-		<p class="copyright">&copy; <?php echo date( 'Y' ); ?> wpthemetable.com / see also <a href="http://plugintable.com/" title="The Periodic Table of WordPress Plugins" target="_blank">plugintable.com</a></p>
+		<p class="copyright">&copy; <?php echo date( 'Y' ); ?> wpthemetable.com / see also
+			<a href="http://plugintable.com/" title="The Periodic Table of WordPress Plugins" target="_blank">plugintable.com</a>
+		</p>
 
 		<p class="info">Brought to you by
 			<a href="https://twitter.com/spinpress" target="_blank" title="Twitter - @SpinPress">@SpinPress</a> /
@@ -216,7 +218,7 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 		function closeTooltips() {
 			$('.tooltip').each(function () {
 				if ($(this).parent('.theme').hasClass('active')) {
-					ga('send', 'event', 'tooltip', 'close', $(this).find('.name').first().text(), $('.theme').index($(this)));
+					ga('send', 'event', 'tooltip', 'close', $(this).find('.name').first().text(), $('.theme').index($(this).parent()));
 				}
 				$(this).parent('.theme').removeClass('active');
 				$(this).removeClass('bottomtop').hide('fast');
