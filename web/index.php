@@ -122,7 +122,7 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 			<div class="example">
 				<div class="element">Symbol</div>
 				<div class="name-wrap">
-					<div class="name">Plugin Name</div>
+					<div class="name">Theme Name</div>
 				</div>
 			</div>
 			<div class="intro">
