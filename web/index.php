@@ -133,9 +133,8 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 				<div class="description">
 					<p>
 						Around <strong>3&lsquo;000 WordPress themes</strong> have been contributed to the
-						<a href="https://wordpress.org/themes/" target="_blank">WordPress.org Theme Directory</a>.
-						Thousands of websites are powered by these themes, developed and maintained by an amazing open-source community around the globe.
-						This table showcases the 108 most popular WordPress themes, ranked by the number of downloads.
+						<a href="https://wordpress.org/themes/" target="_blank">WordPress.org Theme Directory</a> by an amazing open-source community around the globe.
+						This table showcases the 108 most popular WordPress themes from both WordPress.org and ThemeForest, ranked by the number of downloads/sales.
 					</p>
 				</div>
 			</div>
@@ -154,10 +153,10 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 					<div class="tooltip-inner">
 						<div class="upper-wrap">
 							<div class="name">
-								<a href="<?php echo get_theme_name( $theme['slug'] ); ?>" title="<?php echo $theme['name']; ?>" target="_blank"><?php echo $theme['name']; ?></a>
+								<a href="<?php echo get_theme_url( $theme ) ?>" title="<?php echo $theme['name']; ?>" target="_blank" rel="nofollow"><?php echo $theme['name']; ?></a>
 							</div>
 							<div class="author">Author: <?php echo $theme['author']; ?></div>
-							<div class="version">Version: <?php echo $theme['version']; ?></div>
+							<div class="additionalinfo"><?php echo get_theme_additional_info( $theme ); ?></div>
 						</div>
 						<div class="description"><?php echo $theme['short_description']; ?></div>
 						<div class="downloaded"><?php echo str_replace( '-', '&lsquo;', number_format( $theme['downloaded'], 0, '.', '-' ) ); ?></div>
@@ -167,7 +166,7 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 		<?php endforeach; ?>
 	</div>
 	<div class="footer">
-		<p class="copyright">&copy; <?php echo date( 'Y' ); ?> wpthemetable.com</p>
+		<p class="copyright">&copy; <?php echo date( 'Y' ); ?> wpthemetable.com / see also <a href="http://plugintable.com/" title="The Periodic Table of WordPress Plugins" target="_blank">plugintable.com</a></p>
 
 		<p class="info">Brought to you by
 			<a href="https://twitter.com/spinpress" target="_blank" title="Twitter - @SpinPress">@SpinPress</a> /

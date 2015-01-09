@@ -13,7 +13,7 @@ html {
 
 body {
 	position: relative;
-	background: #e3e3e3;
+	background: #fff;
 	font-family: Helvetica, Arial, sans-serif;
 	font-weight: normal;
 	font-size: 12px;
@@ -332,7 +332,7 @@ img {
 	font-size: 24px;
 }
 
-.tooltip .tooltip-inner .author, .tooltip .tooltip-inner .version {
+.tooltip .tooltip-inner .author, .tooltip .tooltip-inner .additionalinfo {
 	font-size: 12px;
 	font-style: italic;
 }

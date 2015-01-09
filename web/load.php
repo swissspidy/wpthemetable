@@ -4,7 +4,10 @@ date_default_timezone_set('Europe/Zurich');
 error_reporting(0);
 
 function sort_by_downloads( $a, $b ) {
-    if ( $a->downloaded == $b->downloaded )
+	$a = (object)$a;
+	$b = (object)$b;
+
+	if ( $a->downloaded == $b->downloaded )
         return 0;
 
     return ( $a->downloaded > $b->downloaded ) ? -1 : 1;
@@ -12,10 +15,11 @@ function sort_by_downloads( $a, $b ) {
 
 function get_themes() {
 	$today = new DateTime( 'today', new DateTimeZone('Europe/Zurich') );
-	$last_updated = DateTime::createFromFormat('Y-m-d', date('Y-m-d', filemtime( '_themes.txt' ) ), new DateTimeZone('Europe/Zurich') );
-	$themes = @file_get_contents( './_themes.txt' );
-	if ( $last_updated < $today || null === json_decode($themes) || ! file_exists( '_themes.txt' ) )
+	$last_updated = DateTime::createFromFormat('Y-m-d', date('Y-m-d', filemtime( '_themes.json' ) ), new DateTimeZone('Europe/Zurich') );
+	$themes = @file_get_contents( './_themes.json' );
+	if ( $last_updated < $today || null === json_decode($themes) || ! file_exists( '_themes.json' ) ) {
 		remote_get_themes();
+	}
 
 	return get_themes_from_cache();
 }
@@ -37,7 +41,7 @@ function remote_get_themes() {
 			)
 		) )
 	);
-	
+
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, "http://api.wordpress.org/themes/info/1.0/");
 	curl_setopt($ch, CURLOPT_POST, true);
@@ -49,7 +53,7 @@ function remote_get_themes() {
 	$data = unserialize($result);
 	if ($data !== false) {
 		usort($data->themes, "sort_by_downloads");
-        file_put_contents( '_themes.txt', json_encode($data->themes) );
+        file_put_contents( '_themes.json', json_encode($data->themes) );
 	}
 
 	curl_close($ch);
@@ -58,8 +62,17 @@ function remote_get_themes() {
 remote_get_themes();
 
 function get_themes_from_cache() {
-	$themes = file_get_contents( './_themes.txt' );
-	return json_decode( $themes, true );
+	$wpdotorg = file_get_contents( './_themes.json' );
+	$themeforest = file_get_contents( './_themeforest.json' );
+
+	$both = array_merge(
+		json_decode( $wpdotorg, true ),
+		json_decode( $themeforest, true )
+	);
+
+	usort($both, "sort_by_downloads");
+
+	return array_slice( $both, 0, 108);
 }
 
 function get_element_name( $name ) {
@@ -113,38 +126,71 @@ function get_element_name( $name ) {
 	 * Reserved names
 	 */
 	switch ( $name ) {
-		case 'Jetpack by WordPress.com':
-			$element = 'Je';
+		case 'Twenty Ten':
+			$element = 'Te';
 			break;
-		case 'Social':
-			$element = 'Scl';
+		case 'Twenty Eleven':
+			$element = 'El';
 			break;
-		case 'Wordfence Security':
-			$element = 'Wf';
+		case 'Twenty Twelve':
+			$element = 'Tw';
 			break;
-		case 'WordPress Social Ring':
-			$element = 'Sr';
+		case 'Twenty Thirteen':
+			$element = 'Th';
 			break;
-		case 'ShareThis: Share Buttons':
-			$element = 'St';
+		case 'Twenty Fourteen':
+			$element = 'Fo';
 			break;
-		case 'Socializer':
-			$element = 'Sz';
+		case 'Twenty Fifteen':
+			$element = 'Fi';
 			break;
-		case 'Polldaddy Polls #38':
-			$element = 'Pd';
+		case 'Tempera':
+			$element = 'Tm';
 			break;
-		case '125':
-			$element = 'Wp';
+		case 'Tracks':
+			$element = 'Tk';
 			break;
-		case 'WordPress Importer':
-			$element = 'Im';
+		case 'The7':
+			$element = 'T';
+			break;
+		case 'iFeature':
+			$element = 'Fe';
+			break;
+		case 'iRibbon':
+			$element = 'Rib';
+			break;
+		case 'Custom Community':
+			$element = 'Cus';
+			break;
+		case 'Portfolio Press':
+			$element = 'Pr';
+			break;
+		case 'Point':
+			$element = 'Pn';
+			break;
+		case 'Simple Catch':
+			$element = 'Si';
+			break;
+		case 'Dusk To Dawn':
+			$element = 'Dk';
+			break;
+		case 'Next Saturday':
+			$element = 'Ne';
+			break;
+		case 'MH Magazine lite':
+			$element = 'Ml';
+			break;
+		case 'MH Purity lite':
+			$element = 'Pu';
+			break;
+		case 'Zerif Lite':
+			$element = 'Zi';
 			break;
 	}
 
 	// Slug definitely already in use
 	if ( isset($elements[$element] ) ) {
-		echo 'XX';
+		$element = 'XX' . $element;
 	}
 
 	$elements[$element] = $name;
@@ -152,82 +198,28 @@ function get_element_name( $name ) {
 }
 
 function get_theme_name( $name, $words = 3, $short = false ) {
-	/**
-	 * Reserved names
-	 */
-	switch ( $name ) {
-		case 'Jetpack by WordPress.com':
-			return 'Jetpack';
-			break;
-		case 'BackUpWordPress':
-			return 'BackUp&shy;WordPress';
-			break;
-        case 'FeedWordPress':
-			return 'Feed&shy;WordPress';
-			break;
-        case 'WooCommerce':
-            return 'Woo&shy;Commerce';
-            break;
-        case 'underConstruction':
-            return 'under&shy;Construction';
-            break;
-    }
-
 	if ( true === $short ) {
 		switch ( $name ) {
-			case 'NextScripts: Social Networks Auto-Poster':
-				return 'Social Networks Auto-Poster';
+			case 'Avada | Responsive Multi-Purpose Theme':
+				return 'Avada';
 				break;
-			case 'ShareThis: Share Buttons and Social Analytics':
-				return 'ShareThis';
+			case 'The7 — Responsive Multi-Purpose WordPress Theme':
+				return 'The7';
 				break;
-			case 'Post video players, slideshow albums, photo galleries and music / podcast playlist':
-				return 'Post video players';
+			case 'Flat Responsive WooCommerce Theme':
+				return 'Flat';
 				break;
-			case 'WooCommerce - excelling eCommerce':
-				return 'Woo&shy;Commerce';
+			case 'WPLMS Learning Management System':
+				return 'WPLMS';
 				break;
-			case 'WordPress SEO by Yoast':
-				return 'WordPress SEO';
+			case 'X | The Theme':
+				return 'X Theme';
 				break;
-			case 'Hupso Share Buttons for Twitter, Facebook &#38; Google+':
-				return 'Hupso Share Buttons';
+			case 'GeneratePress':
+				return 'Generate&shy;Press';
 				break;
-			case 'Shareaholic &#124; email, bookmark, share buttons':
-				return 'Shareaholic';
-				break;
-			case 'Polldaddy Polls &#38; Ratings':
-				return 'Polldaddy';
-				break;
-			case 'Really simple Facebook Twitter share buttons':
-				return 'Really simple share buttons';
-				break;
-			case 'JW Player for WordPress &#8211; Flash &#38; HTML5 Video Player':
-				return 'JW Player for WordPress';
-				break;
-			case 'MapPress Easy Google Maps':
-				return 'MapPress';
-				break;
-			case 's2Member Framework (Member Roles, Capabilities, Membership, PayPal Members)':
-				return 's2Member Framework';
-				break;
-			case 'Shareaholic &#124; share buttons &#38; related posts':
-				return 'Shareaholic';
-				break;
-			case 'Shareaholic* &#124; email, bookmark, share buttons':
-				return 'Shareaholic*';
-				break;
-			case 'MediaElement.js - HTML5 Video &#38; Audio Player':
-				return 'Media&shy;Element.js';
-				break;
-			case 'Advanced YouTube Embed by Embed Plus':
-				return 'Advanced YouTube Embed';
-				break;
-            case 'MailPoet Newsletters (formerly Wysija)':
-				return 'MailPoet Newsletters';
-				break;
-            case 'Quick Cache (Speed Without Compromise)':
-				return 'Quick Cache';
+			case 'SKT Full Width':
+				return 'Full Width';
 				break;
 		}
 	}
@@ -245,13 +237,29 @@ function get_theme_name( $name, $words = 3, $short = false ) {
 
 	$array = array_chunk( $array, $words );
 
-	if ( empty( $array[ 1 ] ) ) 
+	if ( empty( $array[ 1 ] ) )
 		return $name;
 
 
 	return rtrim( implode( ' ', $array[ 0 ] ), ',;()-–' );
 }
 
-function get_theme_url( $slug ) {
-	return 'http://wordpress.org/themes/' . $slug . '/';
+function get_theme_url( $theme ) {
+	$theme = (object)$theme;
+
+	if ( isset( $theme->url ) ) {
+		return $theme->url;
+	} else {
+		return 'https://wordpress.org/themes/' . $theme->slug;
+	}
+}
+
+function get_theme_additional_info( $theme ) {
+	$theme = (object)$theme;
+
+	if ( $theme->commercial ) {
+		return 'Commercial Theme on ThemeForest';
+	} else {
+		return sprintf( 'Version: %s', $theme->version );
+	}
 }
