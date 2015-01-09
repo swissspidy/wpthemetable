@@ -91,7 +91,7 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 	<div class="toolbar-inner">
 		<div class="social-links">
 			<div class="button facebook">
-				<iframe src="//www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fwpthemetable.com&amp;layout=button_count" width="130" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowTransparency="true"></iframe>
+				<iframe src="//www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fwpthemetable.com&amp;layout=button_count" width="130" height="30" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowTransparency="true"></iframe>
 			</div>
 			<div class="button google">
 				<script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -209,14 +209,14 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 				if ($('.table').height() - offset.top < 330)
 					$(this).find('.tooltip').addClass('bottomtop');
 				$(this).addClass('active').find('.tooltip').show('fast');
-				ga('send', 'event', 'tooltip', 'open', $(this).find('.name').first().text(), $('theme').index($(this)));
+				ga('send', 'event', 'tooltip', 'open', $(this).find('.name').first().text(), $('.theme').index($(this)));
 			}
 		});
 
 		function closeTooltips() {
 			$('.tooltip').each(function () {
 				if ($(this).parent('.theme').hasClass('active')) {
-					ga('send', 'event', 'tooltip', 'close', $(this).find('.name').first().text(), $('theme').index($(this)));
+					ga('send', 'event', 'tooltip', 'close', $(this).find('.name').first().text(), $('.theme').index($(this)));
 				}
 				$(this).parent('.theme').removeClass('active');
 				$(this).removeClass('bottomtop').hide('fast');
