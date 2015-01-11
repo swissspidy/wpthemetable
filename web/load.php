@@ -248,7 +248,7 @@ function get_theme_url( $theme ) {
 	$theme = (object)$theme;
 
 	if ( isset( $theme->url ) ) {
-		return $theme->url;
+		return $theme->url . '?ref=swissspidy';
 	} else {
 		return 'https://wordpress.org/themes/' . $theme->slug;
 	}
