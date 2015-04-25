@@ -159,7 +159,7 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 							<div class="author">Author: <?php echo $theme['author']; ?></div>
 							<div class="additionalinfo"><?php echo get_theme_additional_info( $theme ); ?></div>
 						</div>
-						<div class="description"><?php echo $theme['short_description']; ?></div>
+						<div class="description"><?php echo ( isset( $theme['description'] ) ) ? $theme['description'] : ''; ?></div>
 						<div class="downloaded"><?php echo str_replace( '-', '&lsquo;', number_format( $theme['downloaded'], 0, '.', '-' ) ); ?></div>
 					</div>
 				</div>

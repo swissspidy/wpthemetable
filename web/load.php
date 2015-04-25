@@ -281,7 +281,7 @@ function get_theme_url( $theme ) {
 function get_theme_additional_info( $theme ) {
 	$theme = (object) $theme;
 
-	if ( $theme->commercial ) {
+	if ( isset( $theme->commercial ) ) {
 		return 'Commercial Theme on ThemeForest';
 	} else {
 		return sprintf( 'Version: %s', $theme->version );
