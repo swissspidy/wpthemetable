@@ -52,7 +52,7 @@ function get_each_themeforest_theme( $popular_themes ) {
 		);
 	}
 
-	file_put_contents( '_themeforest.json', json_encode($themes) );
+	file_put_contents( '_themeforest.json', json_encode( $themes ) );
 }
 
 /**
@@ -83,7 +83,7 @@ function multi( array $requests, array $opts = [ ] ) {
 		// set url
 		curl_setopt( $chs[ $key ], CURLOPT_URL, $request['url'] );
 		// check for post data and handle if present
-		if ( $request['post_data'] ) {
+		if ( isset( $request['post_data'] ) ) {
 			curl_setopt( $chs[ $key ], CURLOPT_POST, 1 );
 			curl_setopt( $chs[ $key ], CURLOPT_POSTFIELDS, $request['post_array'] );
 		}
