@@ -17,8 +17,9 @@ function sort_by_downloads( $a, $b ) {
 function get_themes() {
 	$today        = new DateTime( 'today', new DateTimeZone( 'Europe/Zurich' ) );
 	$last_updated = DateTime::createFromFormat( 'Y-m-d', date( 'Y-m-d', filemtime( '_themes.json' ) ), new DateTimeZone( 'Europe/Zurich' ) );
-	$themes       = @file_get_contents( './_themes.json' );
-	if ( $last_updated < $today ||  null === json_decode( $themes ) || ! file_exists( '_themes.json' ) ) {
+	$themes       = file_get_contents( './_themes.json' );
+
+	if ( $last_updated < $today || '' === $themes || ! file_exists( '_themes.json' ) ) {
 		remote_get_themes();
 	}
 
