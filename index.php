@@ -1,20 +1,6 @@
-<?php
-if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
-	header( 'Location: http://wpthemetable.com' );
-	exit;
-}
-?>
 <?php header( 'Content-type: text/html; charset=utf-8' ); ?>
 <!DOCTYPE html>
-<!--[if IE 7]>
-<html class="ie ie7" lang="en-US">
-<![endif]-->
-<!--[if IE 8]>
-<html class="ie ie8" lang="en-US">
-<![endif]-->
-<!--[if !(IE 7) | !(IE 8)  ]><!-->
 <html lang="en-US">
-<!--<![endif]-->
 <head>
 	<title>The Periodic Table of WordPress Themes</title>
 	<meta name="viewport" content="width=1360">
@@ -24,11 +10,10 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 	<meta property="og:type" content="website" />
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:title" content="The Periodic Table of WordPress Themes" />
-	<meta property="og:url" content="http://wpthemetable.com" />
-	<meta property="og:image" content="http://wpthemetable.com/img/wpthemetable.png" />
+	<meta property="og:url" content="https://wpthemetable.com" />
+	<meta property="og:image" content="https://wpthemetable.com/img/wpthemetable.png" />
 	<meta property="og:description" content="There are around 3000 themes available in the WordPress.org theme directory. This table showcases the 108 most popular WordPress themes, ranked by the number of downloads." />
 	<link href="https://plus.google.com/103365919153496720927" rel="author" />
-	<link href="https://plus.google.com/+SpinPress" rel="publisher" />
 	<!--
 
 					   `-/+osssssssssssso+/-`
@@ -62,10 +47,10 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 				   ./oys+:.`            `.:+syo/.
 					   `-/+osssssssssssso+/-`
 
-	   We ♥ WordPress — http://wordpress.org/
+	   We ♥ WordPress — https://wordpress.org/
 	   (ASCII art by Mark Jaquith)
 	-->
-	<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <script>
@@ -96,24 +81,20 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 			</div>
 			<div class="button google">
 				<script src="https://apis.google.com/js/platform.js" async defer></script>
-				<div class="g-plus" data-action="share" data-annotation="none" data-href="http://wpthemetable.com"></div>
+				<div class="g-plus" data-action="share" data-annotation="none" data-href="https://wpthemetable.com"></div>
 			</div>
 			<div class="button twitter">
-				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wpthemetable.com" data-via="SpinPress">Tweet</a>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://wpthemetable.com" data-via="swissspidy">Tweet</a>
 				<script>!function (d, s, id) {
-						var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+						var js, fjs = d.getElementsByTagName(s)[0];
 						if (!d.getElementById(id)) {
 							js = d.createElement(s);
 							js.id = id;
-							js.src = p + '://platform.twitter.com/widgets.js';
+							js.src = 'https://platform.twitter.com/widgets.js';
 							fjs.parentNode.insertBefore(js, fjs);
 						}
 					}(document, 'script', 'twitter-wjs');</script>
 			</div>
-		</div>
-		<div class="info-text">
-			<a href="https://spinpress.com/subscribe/" target="_blank" title="Subscribe to our blog!">
-				<p>Curious about future updates? Subscribe to our blog for more information!</p></a>
 		</div>
 	</div>
 </div>
@@ -128,7 +109,7 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 			</div>
 			<div class="intro">
 				<h1 class="logo">
-					<a href="http://wpthemetable.com" title="The Periodic Table of WordPress Themes">The Periodic Table of WordPress Themes</a>
+					<a href="https://wpthemetable.com" title="The Periodic Table of WordPress Themes">The Periodic Table of WordPress Themes</a>
 				</h1>
 
 				<div class="description">
@@ -146,7 +127,7 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 
 		foreach ( $themes as $theme ) : ?>
 			<div class="theme <?php echo $theme['slug']; ?>">
-				<div class="element"><?php echo get_element_name( get_theme_name( $theme['name'] ), 3 ); ?></div>
+				<div class="element"><?php echo get_element_name( get_theme_name( $theme['name'] ) ); ?></div>
 				<div class="name-wrap">
 					<div class="name"><?php echo get_theme_name( $theme['name'], 5, true ); ?></div>
 				</div>
@@ -159,7 +140,7 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 							<div class="author">Author: <?php echo $theme['author']; ?></div>
 							<div class="additionalinfo"><?php echo get_theme_additional_info( $theme ); ?></div>
 						</div>
-						<div class="description"><?php echo ( isset( $theme['description'] ) ) ? $theme['description'] : ''; ?></div>
+						<div class="description"><?php echo isset( $theme['description'] ) ? $theme['description'] : ''; ?></div>
 						<div class="downloaded"><?php echo str_replace( '-', '&lsquo;', number_format( $theme['downloaded'], 0, '.', '-' ) ); ?></div>
 					</div>
 				</div>
@@ -168,16 +149,16 @@ if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
 	</div>
 	<div class="footer">
 		<p class="copyright">&copy; <?php echo date( 'Y' ); ?> wpthemetable.com / see also
-			<a href="http://plugintable.com/" title="The Periodic Table of WordPress Plugins" target="_blank">plugintable.com</a>
+			<a href="https://plugintable.com/" title="The Periodic Table of WordPress Plugins" target="_blank">plugintable.com</a>
 		</p>
 
 		<p class="info">Brought to you by
-			<a href="https://twitter.com/spinpress" target="_blank" title="Twitter - @SpinPress">@SpinPress</a> /
-			<a href="http://spinpress.com" title="SpinPress – A new spin on WordPress community news" target="_blank">SpinPress.com</a>
+			<a href="https://pascalbirchler.com">Pascal Birchler</a>
+			<a href="https://twitter.com/swissspidy">(@swissspidy)</a>
 		</p>
 	</div>
 </div>
-<script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.9.0.min.js"></script>
 <script>
 	jQuery(document).ready(function ($) {
 		$(".theme:nth-of-type(2)").addClass('nth-of-type-float');
