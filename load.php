@@ -73,9 +73,12 @@ function get_themes_from_cache() {
 	$wpdotorg    = file_get_contents( './_themes.json' );
 	$themeforest = file_get_contents( './_themeforest.json' );
 
+	$wpdotorg    = json_decode( $wpdotorg, true );
+	$themeforest = json_decode( $themeforest, true );
+
 	$both = array_merge(
-		json_decode( $wpdotorg, true ),
-		json_decode( $themeforest, true )
+		$wpdotorg ?? [],
+		$themeforest ?? []
 	);
 
 	usort( $both, "sort_by_downloads" );
